@@ -1,0 +1,21 @@
+{
+  "name": "myhealthway-routine-checkup-to-snomed",
+  "version": "0.1.0",
+  "description": "한국 국가건강검진(나의건강기록 앱) routineCheckup 데이터를 SNOMED CT 표준코드 v5 5-시트 워크북(00 환자정보 / A 측정소견 / B 임상해석 / C 비교 / D 코드레퍼런스)으로 결정론적 변환하는 플러그인",
+  "author": {
+    "name": "Mingyu Kang",
+    "email": "drugnsafety@gmail.com"
+  },
+  "keywords": [
+    "snomed-ct",
+    "loinc",
+    "korean-health-checkup",
+    "myhealthway",
+    "나의건강기록",
+    "clinical-informatics",
+    "fhir",
+    "v5-format",
+    "hc_finding"
+  ],
+  "license": "MIT"
+}

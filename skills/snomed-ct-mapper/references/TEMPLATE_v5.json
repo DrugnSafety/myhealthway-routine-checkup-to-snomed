@@ -1,0 +1,179 @@
+{
+  "_meta": {
+    "version": "5.0",
+    "purpose": "Skeleton for v5 workbook generation. Pass this to openpyxl as the canonical structure."
+  },
+  "sheets": [
+    {
+      "name": "00_환자기본정보",
+      "title_row1": "환자 기본정보 및 검진 측정값 요약",
+      "header_row": 3,
+      "headers": ["항목", "{exam_date_1}", "{exam_date_2}", "단위", "비고"],
+      "sections": [
+        {
+          "header": "■ 환자 식별 정보",
+          "items": [
+            {"label": "patientName (환자명)",      "field": "patientName",         "unit": "",  "note": "이름"},
+            {"label": "birthDate (생년월일)",      "field": "birthDate",           "unit": "",  "note": "JSON 추정"},
+            {"label": "patient_id (비식별)",       "field": "patient_id",          "unit": "",  "note": "연구용 ID"}
+          ]
+        },
+        {
+          "header": "■ 검진 메타",
+          "items": [
+            {"label": "examinationDate (검진일)",  "field": "examinationDate",     "unit": "",   "note": ""},
+            {"label": "screeningDate (판정일)",    "field": "screeningDate",       "unit": "",   "note": ""},
+            {"label": "organizationName (검진기관)","field": "organizationName",   "unit": "",   "note": ""},
+            {"label": "판정의사",                  "field": "diagnosingDoctor",    "unit": "",   "note": ""}
+          ]
+        },
+        {
+          "header": "■ 계측검사 — 신체 계측",
+          "items": [
+            {"label": "height (신장)",             "field": "height",              "unit": "cm",     "note": "원시값÷10"},
+            {"label": "weight (체중)",             "field": "weight",              "unit": "kg",     "note": "원시값÷10"},
+            {"label": "waistCircumference (허리둘레)","field": "waist",            "unit": "cm",     "note": "복부비만 기준 남≥90 여≥85"},
+            {"label": "bmi (체질량지수)",          "field": "bmi",                 "unit": "kg/m²",  "note": "정상 18.5–24.9 / 과체중 25–29.9 / 비만 ≥30"},
+            {"label": "waist 판정",                "field": "waist_judgment",      "unit": "",       "note": ""},
+            {"label": "bmi 판정",                  "field": "bmi_judgment",        "unit": "",       "note": ""}
+          ]
+        },
+        {
+          "header": "■ 활력징후",
+          "items": [
+            {"label": "visionLeft (시력 좌)",      "field": "visionLeft",          "unit": "",       "note": "원시값÷10"},
+            {"label": "visionRight (시력 우)",     "field": "visionRight",         "unit": "",       "note": "(교정시력) 표기 보존"},
+            {"label": "hearingLeft (청력 좌)",     "field": "hearingLeft",         "unit": "",       "note": "정상/질환의심"},
+            {"label": "hearingRight (청력 우)",    "field": "hearingRight",        "unit": "",       "note": "정상/질환의심"},
+            {"label": "bloodPressure (혈압)",      "field": "bloodPressure",       "unit": "mmHg",   "note": ""},
+            {"label": "systolic (수축기)",         "field": "systolic",            "unit": "mmHg",   "note": ""},
+            {"label": "diastolic (이완기)",        "field": "diastolic",           "unit": "mmHg",   "note": ""}
+          ]
+        },
+        {
+          "header": "■ 혈액검사",
+          "items": [
+            {"label": "hemoglobin (혈색소)",       "field": "hemoglobin",          "unit": "g/dL",   "note": "여성 12.0–15.5, 남성 13.0–17.5"},
+            {"label": "fastingGlucose (공복혈당)", "field": "fastingGlucose",      "unit": "mg/dL",  "note": "정상<100, IFG 100–125, 당뇨≥126"},
+            {"label": "totalCholesterol (총콜레스테롤)","field": "totalCholesterol","unit": "mg/dL", "note": "정상<200"},
+            {"label": "hdlCholesterol (HDL)",       "field": "hdlCholesterol",     "unit": "mg/dL",  "note": "여성권장≥50, 남성≥40"},
+            {"label": "ldlCholesterol (LDL)",       "field": "ldlCholesterol",     "unit": "mg/dL",  "note": "정상<130"},
+            {"label": "triglycerides (중성지방)",   "field": "triglycerides",      "unit": "mg/dL",  "note": "정상<150 / 경계 150–199"},
+            {"label": "serumCreatinine (혈청크레아티닌)","field":"serumCreatinine","unit":"mg/dL",   "note": "여성≤1.2"},
+            {"label": "egfr (신사구체여과율)",     "field": "egfr",                "unit": "mL/min/1.73m²","note":"정상≥60"},
+            {"label": "ast (AST/SGOT)",             "field": "ast",                 "unit": "IU/L",   "note": "정상≤40"},
+            {"label": "alt (ALT/SGPT)",             "field": "alt",                 "unit": "IU/L",   "note": "여성정상≤35, 남성≤45"},
+            {"label": "gamaGtp (감마GTP)",         "field": "gamaGtp",             "unit": "IU/L",   "note": "여성정상≤35, 남성≤55"}
+          ]
+        },
+        {
+          "header": "■ 요검사 / 영상검사",
+          "items": [
+            {"label": "urinaryProtein (요단백)",   "field": "urinaryProtein",      "unit": "",       "note": "정상/경계/단백뇨의심"},
+            {"label": "chestXray (흉부촬영)",      "field": "chestXray",           "unit": "",       "note": "정상/질환의심(비결핵성)/순환기계 질환의심"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "A_hc_finding",
+      "title_row1": "A_hc_finding — 검사·측정 직접 소견 (raw findings)",
+      "legend_row2": "presence_status: ■present(녹)=소견있음  ■absent(청)=없음/정상  ■suspected(황)=의심  ■not_measured(회)=미시행/비해당",
+      "header_row": 3,
+      "headers": [
+        "#", "patient_id", "exam_date", "finding_source", "finding_category",
+        "item_name_kr", "snomed_code", "snomed_display", "presence_status",
+        "presence_qualifier_code", "verification_status", "snomed_domain",
+        "derived_value", "ref_range", "medication_related", "mapping_confidence",
+        "loinc_code", "mapper_note"
+      ],
+      "category_dividers": [
+        "  ▶  A_계측",
+        "  ▶  B_혈액",
+        "  ▶  C_요검사",
+        "  ▶  D_영상",
+        "  ▶  E_생활습관",
+        "  ▶  F_문진",
+        "  ▶  G_특수 — B형간염 (비해당)",
+        "  ▶  G_특수 — 골밀도/우울증/인지기능",
+        "  ▶  G_특수 — 노인기능검사 (비해당)",
+        "  ▶  G_특수 — 예방접종 (항상 생성)",
+        "  ▶  H_질환소견",
+        "  ▶  I_암검진 파생"
+      ]
+    },
+    {
+      "name": "B_hc_clinical",
+      "title_row1": "B_hc_clinical — 임상 해석 결과 (disease presence/absence judgements)",
+      "legend_row2": "presence_status: ■present(녹)=소견있음  ■absent(청)=없음/정상  ■suspected(황)=의심  ■not_measured(회)=미시행/비해당",
+      "principles_row3": "【원칙】①양성소견→해당상태 present 직접표기  ②상위진단확정→파생진단생략  ③음성확인이임상적의미있는경우만absent  ④not_measured=미시행/비해당  ⑤항상생성항목표시",
+      "header_row": 4,
+      "headers": [
+        "#", "patient_id", "exam_date", "finding_source", "finding_category",
+        "item_name_kr", "snomed_code", "snomed_display", "presence_status",
+        "presence_qualifier_code", "verification_status", "snomed_domain",
+        "derived_value", "ref_range", "medication_related", "mapping_confidence",
+        "loinc_code", "mapper_note"
+      ],
+      "category_dividers": [
+        "  ▶  A_계측 — 임상 해석",
+        "  ▶  B_혈액 — 임상 해석",
+        "  ▶  C_요검사 — 임상 해석",
+        "  ▶  D_영상 — 임상 해석",
+        "  ▶  E_생활습관 — 임상 해석 (모두 포함)",
+        "  ▶  G_특수 — B형간염 (비해당→not_measured)",
+        "  ▶  G_특수 — 골밀도/우울증/인지기능 (항상 생성)",
+        "  ▶  G_특수 — 노인기능검사 (비해당→not_measured, 항상 생성)",
+        "  ▶  G_특수 — 예방접종 (항상 생성)",
+        "  ▶  I_암검진 — 임상 해석 (항상 생성)"
+      ]
+    },
+    {
+      "name": "C_2023_비교",
+      "title_row1": "C_2023_비교 — {patient_name} {exam_date_2} | ★ {exam_date_1} 대비 차이 항목",
+      "legend_row2": "presence_status: ■present(녹)=소견있음  ■absent(청)=없음/정상  ■suspected(황)=의심  ■not_measured(회)=미시행/비해당",
+      "header_row": 3,
+      "headers": [
+        "#", "patient_id", "exam_date", "finding_source", "finding_category",
+        "item_name_kr", "snomed_code", "snomed_display", "presence_status",
+        "presence_qualifier_code", "verification_status", "snomed_domain",
+        "derived_value", "ref_range", "medication_related", "mapping_confidence",
+        "loinc_code", "mapper_note"
+      ],
+      "category_dividers": [
+        "  ▶  A_계측 차이",
+        "  ▶  B_혈액 차이",
+        "  ▶  임상 해석 차이",
+        "  ▶  암검진 차이"
+      ],
+      "note": "비교 모드가 아닐 때는 헤더만 두고 데이터 행은 비워둔다 — 시트는 항상 생성."
+    },
+    {
+      "name": "D_SNOMED_코드_레퍼런스",
+      "title_row1": "SNOMED CT 코드 레퍼런스 — v5 신규 추가 코드 및 검증 상태",
+      "header_row": 3,
+      "headers": ["SNOMED 코드", "개념명 (영문)", "한국어 설명", "검증 상태", "사용 시트", "비고"],
+      "verification_status_legend": {
+        "✅ 본 세션 내 MCP 검증":       "이번 세션에서 MCP lookup으로 직접 확인",
+        "✅ MCP 이전 검증":             "과거 세션에서 검증된 코드",
+        "✅ 참조 코드":                 "표준 검색으로 확인되는 잘 알려진 코드",
+        "⚠ MCP 재가동 후 검증 필요":  "신규/유추 코드, 사용 가능하나 검증 미완",
+        "⚠ MCP 503 미검증 (사용자 지정)":"MCP 장애로 검증 실패"
+      }
+    }
+  ],
+  "styling": {
+    "title_row":    {"fill": "305496", "font_color": "FFFFFF", "bold": true, "size": 12},
+    "header_row":   {"fill": "4472C4", "font_color": "FFFFFF", "bold": true, "size": 10},
+    "category_div": {"fill": "D9E1F2", "italic": true},
+    "presence_color": {
+      "present":      "C6EFCE",
+      "absent":       "DDEBF7",
+      "suspected":    "FFEB9C",
+      "not_measured": "E7E6E6"
+    },
+    "freeze_panes": "A4",
+    "wrap_text":    true
+  },
+  "filename_template": "{patient_id}_v5_{exam_date_or_range}.xlsx"
+}

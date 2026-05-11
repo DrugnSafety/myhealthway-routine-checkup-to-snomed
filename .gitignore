@@ -216,3 +216,26 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# === Privacy: Patient data anonymization rules ===
+_PRIVATE_DO_NOT_COMMIT/
+*_mapping.csv
+mapping/
+
+# Real patient names (any Hangul name + 4-digit year filename)
+# Files are anonymized to 초성 (e.g., ㅅㅈㅅ_1949-05-30) before commit
+# Mapping CSVs that contain real ↔ anonymized are LOCAL-ONLY
+
+# Korean OS junk
+.DS_Store
+Thumbs.db
+
+# Build / cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Workspaces that may contain raw patient JSON
+uploads/
+raw_data/
+*연구대상자*
